@@ -71,7 +71,7 @@ Running the Program
 Clone the repository:
 
 bash
-git clone https://github.com/mostafashaddad/MemSheenDragon.git
+git clone https://github.com/mostafashaddad/CodeAlpha-Task1/blob/main/MemsheenDragon.py
 Navigate to the project directory:
 
 bash
