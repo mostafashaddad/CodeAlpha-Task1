@@ -64,3 +64,76 @@
 - Install the required libraries using the following command:
   ```bash
   pip install scapy psutil colorama prettytable
+
+
+
+Running the Program
+Clone the repository:
+
+bash
+git clone https://github.com/your-username/mem-sheen-dragon.git
+Navigate to the project directory:
+
+bash
+cd mem-sheen-dragon
+Run the program:
+
+bash
+python sniffer.py
+:eyes: Usage Examples
+Start Packet Capture
+python
+# Start capturing packets from the selected network interface
+app.start_sniffing()
+Stop Packet Capture
+python
+# Stop capturing packets
+app.stop_sniffing()
+Export Data
+python
+# Export data to a JSON file
+app.export_packets()
+:compass: Roadmap
+Add a graphical user interface
+
+Support exporting data to text, JSON, and CSV files
+
+Add advanced packet filtering
+
+Support additional protocols like FTP and SSH
+
+Add statistical reports on network traffic
+
+:wave: Contributing
+Contributions are welcome! If you'd like to contribute to this project, please follow these steps:
+
+Fork the project.
+
+Create a new branch (git checkout -b feature/YourFeatureName).
+
+Make your changes and stage them (git add .).
+
+Commit your changes (git commit -m 'Add some feature').
+
+Push your changes to the branch (git push origin feature/YourFeatureName).
+
+Open a Pull Request.
+
+:warning: License
+This project is licensed under the MIT License.
+
+:handshake: Contact
+Name: Mem Sheen
+
+Email: memsheen@example.com
+
+Project: Mem Sheen Dragon
+
+:gem: Acknowledgements
+Scapy - Library for capturing and analyzing network packets.
+
+Tkinter - Library for creating graphical user interfaces in Python.
+
+SQLite3 - Lightweight and easy-to-use database.
+
+Mem Sheen Dragon is a powerful and user-friendly tool for analyzing network traffic. If you have any questions or suggestions, feel free to reach out! 😊
