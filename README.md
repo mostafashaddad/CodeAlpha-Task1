@@ -18,7 +18,7 @@
 ## :camera: Screenshots
 
 <div align="center"> 
-  <img src="https://placehold.co/600x400?text=Your+Screenshot+here" alt="screenshot" />
+  <img src="Screenshots.png" alt="screenshot" />
 </div>
 
 ---
@@ -123,9 +123,9 @@ Open a Pull Request.
 This project is licensed under the MIT License.
 
 :handshake: Contact
-Name: Mem Sheen
+Name: Mostafa Shaddad
 
-Email: memsheen@example.com
+Email: mostafashaddadd@gmail.com
 
 Project: Mem Sheen Dragon
 
