@@ -39,7 +39,7 @@
 1. **Run the Program**:
    - Run the program using the following command:
      ```bash
-     python sniffer.py
+     python MemsheenDragon.py
      ```
 
 2. **Select Network Interface**:
@@ -71,15 +71,15 @@ Running the Program
 Clone the repository:
 
 bash
-git clone https://github.com/your-username/mem-sheen-dragon.git
+git clone https://github.com/mostafashaddad/MemSheenDragon.git
 Navigate to the project directory:
 
 bash
-cd mem-sheen-dragon
+cd MemSheenDragon
 Run the program:
 
 bash
-python sniffer.py
+python MemsheenDragon.py
 :eyes: Usage Examples
 Start Packet Capture
 python
@@ -125,7 +125,9 @@ This project is licensed under the MIT License.
 :handshake: Contact
 Name: Mostafa Shaddad
 
-Email: mostafashaddadd@gmail.com
+Email: [mostafashaddadd@gmail.com]
+
+GitHub: mostafashaddad
 
 Project: Mem Sheen Dragon
 
